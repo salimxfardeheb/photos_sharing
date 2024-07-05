@@ -1,7 +1,9 @@
 import React,{useState} from 'react'
+import { Helmet } from 'react-helmet';
 import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
 import './App.css';
+
 const App = () => {
   const [todos, setTodos] = useState([
     {id: 1, text: 'learn react', completed : false },
@@ -23,8 +25,14 @@ const App = () => {
   }
 
   return (
-    <div className='App'>
-      <h1>Todo List</h1>
+    <div className='flex flex-col justify-center items-center space-y-12 m-20 bg-green-500 p-10'>
+       <Helmet>
+        <title>To-Do List App</title>
+        <meta name="description" content="To-Do List application built with React" />
+        
+        
+      </Helmet>
+      <h1 className='text-5xl font-semibold'>Todo List</h1>
       <TodoForm addTodo={addTodo}/>
       <TodoList todos={todos} toggleComplete={toggleComplete} deleteTodo={deleteTodo}/>
     </div>
