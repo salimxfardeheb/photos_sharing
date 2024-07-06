@@ -27,7 +27,7 @@ const App = () => {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-12 bg-blue-900 min-h-screen p-10 font-poppins">
+    <div className="flex flex-col items-center space-y-12 bg-gradient-to-tl from-teal-600 via-50% to-cyan-500 min-h-screen p-10 font-poppins">
       <Helmet>
         <title>To-Do List App</title>
         <meta
