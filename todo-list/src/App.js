@@ -1,23 +1,18 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import TodoList from "./components/TodoList";
 import TodoForm from "./components/TodoForm";
 import "./App.css";
 
 const App = () => {
+  const [todos, setTodos] = useState([]);
 
-  const [Message, setMessage] = useState("");
+  useEffect(() => {
+    fetch("http://localhost:8001/data")
+      .then((res) => res.json())
+      .then((data) => setTodos(data));
+  }, []);
 
-  useEffect(()=> {
-    fetch("http://localhost:8001/message")
-    .then((res) => res.json())
-    .then((data) => setMessage(data.message))
-  })
-
-  const [todos, setTodos] = useState([
-    { id: 1, text: "learn react", completed: false },
-    { id: 2, text: "build a todo app", completed: false },
-  ]);
   const addTodo = (text) => {
     const newTodos = [...todos, { id: Date.now(), text, completed: false }];
     setTodos(newTodos);
@@ -51,7 +46,8 @@ const App = () => {
           rel="stylesheet"
         />
       </Helmet>
-      <h1 className="text-7xl font-bold text-white">{Message}</h1>
+      <h1 className="text-7xl font-bold text-white">Todo List</h1>
+      
       <TodoForm addTodo={addTodo} />
       <TodoList
         todos={todos}

@@ -10,8 +10,9 @@ const TodoItem = ({ todo, toggleComplete, deleteTodo }) => {
           id={todo.id}
           name={todo.id}
           className="w-6 accent-green-600 cursor-pointer"
+          onClick={()=> {}}
         />
-        <label for={todo.id}>{todo.text}</label>
+        <label for={todo.id}>{todo.description}</label>
       </div>
       <button
         onClick={() => deleteTodo(todo.id)}
