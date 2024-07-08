@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import TodoList from "./components/TodoList";
@@ -13,15 +14,14 @@ const App = () => {
       .then((data) => setTodos(data));
   }, []);
 
-  const addTodo = (text) => {
-    const newTodos = [...todos, { id: Date.now(), text, completed: false }];
-    setTodos(newTodos);
-  };
+  const callServer = () => {
+    axios.get('http://localhost:8001/sendata').then((data)=> {
+      console.log(data)
+    })
+  }
 
-  const toggleComplete = (id) => {
-    const newTodos = todos.map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    );
+  const addTodo = (description) => {
+    const newTodos = [...todos, { id: Date.now(), description, completed: false }];
     setTodos(newTodos);
   };
 
@@ -47,13 +47,10 @@ const App = () => {
         />
       </Helmet>
       <h1 className="text-7xl font-bold text-white">Todo List</h1>
-      
+      <button className="text-7xl font-bold text-white" onClick={callServer}>hey</button>
+
       <TodoForm addTodo={addTodo} />
-      <TodoList
-        todos={todos}
-        toggleComplete={toggleComplete}
-        deleteTodo={deleteTodo}
-      />
+      <TodoList todos={todos} deleteTodo={deleteTodo} />
     </div>
   );
 };

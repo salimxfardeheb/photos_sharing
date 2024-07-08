@@ -1,7 +1,7 @@
 import React from "react";
 import { MdDelete } from "react-icons/md";
 
-const TodoItem = ({ todo, toggleComplete, deleteTodo }) => {
+const TodoItem = ({ todo, deleteTodo }) => {
   return (
     <li className="flex justify-between items-start bg-white p-4 rounded-md shadow-md hover:opacity-80 hover:scale-[101%] hover:transition-all hover:ease-in">
       <div className="flex gap-3">
@@ -25,3 +25,7 @@ const TodoItem = ({ todo, toggleComplete, deleteTodo }) => {
 };
 
 export default TodoItem;
+
+// send data from react to server
+// send data to the database 
+// updating data from front end to backend (task done)
