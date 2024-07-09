@@ -14,11 +14,7 @@ const App = () => {
       .then((data) => setTodos(data));
   }, []);
 
-  const callServer = () => {
-    axios.get('http://localhost:8001/sendata').then((data)=> {
-      console.log(data)
-    })
-  }
+
 
   const addTodo = (description) => {
     const newTodos = [...todos, { id: Date.now(), description, completed: false }];
@@ -47,8 +43,6 @@ const App = () => {
         />
       </Helmet>
       <h1 className="text-7xl font-bold text-white">Todo List</h1>
-      <button className="text-7xl font-bold text-white" onClick={callServer}>hey</button>
-
       <TodoForm addTodo={addTodo} />
       <TodoList todos={todos} deleteTodo={deleteTodo} />
     </div>

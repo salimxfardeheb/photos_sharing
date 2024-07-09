@@ -11,16 +11,21 @@ app.use(express.json());
 app.use(body_parser.urlencoded({ extended: true }));
 app.use(body_parser.json());
 
-conn.connection.query("select * from tasks", (err, results) => {
-  if (err) {
-    console.log("error :", err);
+const fetchData = () => {
+  const request = "select * from tasks"
+  conn.connection.query(request, (err, results) => {
     if (err) {
-      console.log(err);
-      throw err;
+      console.log("error :", err);
+      if (err) {
+        console.log(err);
+        throw err;
+      }
     }
-  }
-  data = results;
-});
+    data = results;
+  });
+};
+
+fetchData();
 
 app.post("/send-data", (req, res) => {
   const { task } = req.body;
@@ -34,6 +39,22 @@ app.post("/send-data", (req, res) => {
     }
     res.status(200).send("data inserted successfully");
   });
+});
+
+app.post("/update-data", (req, res) => {
+  const { id, completed } = req.body;
+  console.log(id, completed);
+  const request = 'update tasks set completed = ? where id = ?'
+  conn.connection.query(request, [completed, id], (err , result)=> {
+    if(err){
+      console.log("error :", err);
+      res.status(500).send("error updating data ");
+
+    } else {
+      fetchData();
+      res.status(200).send("data updated successfully");
+    }
+  })
 });
 
 app.get("/data", (req, res) => {

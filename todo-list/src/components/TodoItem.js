@@ -1,7 +1,19 @@
-import React from "react";
-import { MdDelete } from "react-icons/md";
+import axios from 'axios';
+import React, { useState } from 'react';
+import { MdDelete } from 'react-icons/md';
 
-const TodoItem = ({ todo, deleteTodo }) => {
+const TodoItem = ({ todo, toggleItem,deleteTodo }) => {
+  const [completed, setCompleted] = useState(todo.completed);
+
+  const handleToggleCompleted = () => {
+    const newCompleted = !completed
+    setCompleted(newCompleted);
+    axios
+      .post(`http://localhost:8001/update-data`, { completed: newCompleted, id: todo.id })
+      .then(() => console.log('success !!!'))
+      .catch(() => console.log('error sending data !!!'));
+  };
+
   return (
     <li className="flex justify-between items-start bg-white p-4 rounded-md shadow-md hover:opacity-80 hover:scale-[101%] hover:transition-all hover:ease-in">
       <div className="flex gap-3">
@@ -10,9 +22,10 @@ const TodoItem = ({ todo, deleteTodo }) => {
           id={todo.id}
           name={todo.id}
           className="w-6 accent-green-600 cursor-pointer"
-          onClick={()=> {}}
+          checked={completed} 
+          onClick={handleToggleCompleted}
         />
-        <label for={todo.id}>{todo.description}</label>
+        <label htmlFor={todo.id}>{todo.description}</label>
       </div>
       <button
         onClick={() => deleteTodo(todo.id)}
@@ -25,7 +38,3 @@ const TodoItem = ({ todo, deleteTodo }) => {
 };
 
 export default TodoItem;
-
-// send data from react to server
-// send data to the database 
-// updating data from front end to backend (task done)

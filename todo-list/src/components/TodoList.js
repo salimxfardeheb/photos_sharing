@@ -1,13 +1,14 @@
 import React from "react";
 import TodoItem from "./TodoItem"
 
-const TodoList = ({ todos, deleteTodo}) => {
+const TodoList = ({ todos, toggleComplete, deleteTodo}) => {
     return (
         <ul className="w-full flex flex-col gap-4">
             {todos.map(todo => (
                 <TodoItem 
                 key={todo.id}
                 todo={todo}
+                toggleCompelete = {toggleComplete}
                 deleteTodo={deleteTodo}
                 />
             ))}
