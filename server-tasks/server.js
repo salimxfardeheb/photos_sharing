@@ -23,8 +23,17 @@ conn.connection.query("select * from tasks", (err, results) => {
 });
 
 app.post("/send-data", (req, res) => {
-  const { task }  = req.body;
+  const { task } = req.body;
   console.log(task);
+  const completed = false;
+  const request = `insert into tasks (description, completed) values (? , ? );`;
+  conn.connection.query(request, [task, completed], (err, rseult) => {
+    if (err) {
+      console.log("error :", err);
+      res.status(500).send("error inserting data ");
+    }
+    res.status(200).send("data inserted successfully");
+  });
 });
 
 app.get("/data", (req, res) => {
