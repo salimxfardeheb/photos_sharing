@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import TodoList from "./components/TodoList";
@@ -14,16 +14,22 @@ const App = () => {
       .then((data) => setTodos(data));
   }, []);
 
-
-
   const addTodo = (description) => {
-    const newTodos = [...todos, { id: Date.now(), description, completed: false }];
+    const newTodos = [
+      ...todos,
+      { id: Date.now(), description, completed: false },
+    ];
     setTodos(newTodos);
   };
 
   const deleteTodo = (id) => {
     const newTodos = todos.filter((todo) => todo.id !== id);
     setTodos(newTodos);
+
+    axios
+      .post("http://localhost:8001/delete-data", { id })
+      .then(() => console.log("deleting ..."))
+      .catch(() => console.log("error deliting"));
   };
 
   return (

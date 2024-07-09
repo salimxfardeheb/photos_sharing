@@ -12,7 +12,7 @@ app.use(body_parser.urlencoded({ extended: true }));
 app.use(body_parser.json());
 
 const fetchData = () => {
-  const request = "select * from tasks"
+  const request = "select * from tasks";
   conn.connection.query(request, (err, results) => {
     if (err) {
       console.log("error :", err);
@@ -44,17 +44,31 @@ app.post("/send-data", (req, res) => {
 app.post("/update-data", (req, res) => {
   const { id, completed } = req.body;
   console.log(id, completed);
-  const request = 'update tasks set completed = ? where id = ?'
-  conn.connection.query(request, [completed, id], (err , result)=> {
-    if(err){
+  const request = "update tasks set completed = ? where id = ?";
+  conn.connection.query(request, [completed, id], (err, result) => {
+    if (err) {
       console.log("error :", err);
       res.status(500).send("error updating data ");
-
     } else {
       fetchData();
       res.status(200).send("data updated successfully");
     }
-  })
+  });
+});
+
+app.post("/delete-data", (req, res) => {
+  const { id } = req.body;
+  console.log('task deletd ! ')
+  const request = "delete from tasks where id = ?";
+  conn.connection.query(request, [id], (err, result) => {
+    if (err) {
+      console.log("error :", err);
+      res.status(500).send("error deleting data ");
+    } else {
+      fetchData();
+      res.status(200).send("data deleted successfully");
+    }
+  });
 });
 
 app.get("/data", (req, res) => {
