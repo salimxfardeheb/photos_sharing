@@ -31,9 +31,10 @@ const App = () => {
       .then(() => console.log("deleting ..."))
       .catch(() => console.log("error deliting"));
   };
+  const classee = "bg-gradient-to-tl from-teal-600 via-50% to-cyan-500"
 
   return (
-    <div className="flex flex-col items-center space-y-12 bg-gradient-to-tl from-teal-600 via-50% to-cyan-500 min-h-screen p-10 font-poppins">
+    <div className="flex flex-col items-center space-y-12 bg-[#384454] min-h-screen p-10 font-poppins">
       <Helmet>
         <title>To-Do List App</title>
         <meta
@@ -47,9 +48,13 @@ const App = () => {
           href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
           rel="stylesheet"
         />
+        <link rel="icon" href="/images/logo.png"/>
       </Helmet>
-      <h1 className="text-7xl font-bold text-white">Todo List</h1>
+      <div className="flex p-4 w-full space-x-5 justify-between items-center shadow-md rounded-3xl">
+        <div className="max-w-fit"><img src="/images/logo.png" className="w-32"/></div>
+      <h1 className="text-7xl font-bold text-white">DO IT TODAY !</h1>
       <TodoForm addTodo={addTodo} />
+      </div>
       <TodoList todos={todos} deleteTodo={deleteTodo} />
     </div>
   );

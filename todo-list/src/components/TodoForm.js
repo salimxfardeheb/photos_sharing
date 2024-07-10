@@ -22,7 +22,7 @@ const TodoForm = ({ addTodo }) => {
   };
 
   return (
-    <form className="flex gap-2">
+    <form className="flex gap-2 h-1/3">
       <input
         className="p-3 rounded-l-md focus:outline-blue-600"
         type="text"
