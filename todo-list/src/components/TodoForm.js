@@ -22,9 +22,9 @@ const TodoForm = ({ addTodo }) => {
   };
 
   return (
-    <form className="flex gap-2 h-1/3">
+    <form className="flex md:gap-2 gap-1 h-1/5 max-w-full">
       <input
-        className="p-3 rounded-l-md focus:outline-blue-600"
+        className="md:p-3 p-2 rounded-l-md focus:outline-blue-600 w-fit"
         type="text"
         value={value}
         onChange={(e) => setValue(e.target.value)}
@@ -32,7 +32,7 @@ const TodoForm = ({ addTodo }) => {
       />
       <button
         type="submit"
-        className="text-xl text-white bg-blue-600 p-3 rounded-r-md hover:bg-white hover:text-blue-600"
+        className="md:text-xl text-lg text-white bg-blue-600 p-3 rounded-r-md hover:bg-white hover:text-blue-600"
         onClick={handleSubmit}
       >
         <RiPlayListAddFill />

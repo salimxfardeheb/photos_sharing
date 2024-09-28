@@ -29,7 +29,7 @@ fetchData();
 
 app.post("/send-data", (req, res) => {
   const { task } = req.body;
-  console.log(task);
+  console.log(`task "${task}" added correctly`);
   const completed = false;
   const request = `insert into tasks (description, completed) values (? , ? );`;
   conn.connection.query(request, [task, completed], (err, rseult) => {
@@ -58,7 +58,7 @@ app.post("/update-data", (req, res) => {
 
 app.post("/delete-data", (req, res) => {
   const { id } = req.body;
-  console.log('task deletd ! ')
+  console.log("task deletd ! ");
   const request = "delete from tasks where id = ?";
   conn.connection.query(request, [id], (err, result) => {
     if (err) {
